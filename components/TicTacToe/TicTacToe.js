@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TicTacToe() {
     const [board, setBoard] = useState([
@@ -17,6 +17,13 @@ export default function TicTacToe() {
         checkWinner();
         setIsCPUNext(true);
     }
+
+    useEffect(() => {
+        if (winner) return;
+        if (isCPUNext) {
+            CPUPlay();
+        }
+    }, [isCPUNext]);
 
     return (
         <div>

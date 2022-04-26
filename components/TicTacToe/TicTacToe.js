@@ -9,6 +9,14 @@ export default function TicTacToe() {
     const [isCPUNext, setIsCPUNext] = useState(false);
     const [winner, setWinner] = useState(null);
 
+    function playFn(arrayIndex, index) {
+        if (isCPUNext) return;
+        if (winner) return;
+        board[arrayIndex][index] = players?.SYM;
+        setBoard((board) => [...board]);
+        checkWinner();
+        setIsCPUNext(true);
+    }
 
     return (
         <div>

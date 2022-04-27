@@ -9,6 +9,8 @@ export default function TicTacToe() {
     const [isCPUNext, setIsCPUNext] = useState(false);
     const [winner, setWinner] = useState(null);
 
+    // The playFn function will check if the game is over. If it is, it will display the winner. 
+    // If not, it will check if the player is next.
     function playFn(arrayIndex, index) {
         if (isCPUNext) return;
         if (winner) return;
@@ -18,6 +20,9 @@ export default function TicTacToe() {
         setIsCPUNext(true);
     }
 
+    // This useEffect Hook runs once the component is mounted, checking if the game is over. 
+    // If it is, it will return. If it is not, it will check if the CPU is next. 
+    // If it is, it will call the cPUPlay function to play the game.
     useEffect(() => {
         if (winner) return;
         if (isCPUNext) {
@@ -25,6 +30,9 @@ export default function TicTacToe() {
         }
     }, [isCPUNext]);
 
+    // The cPUPlay function checks if the game is over. 
+    // If it is, it will return. If it is not, it will call sleep for 10 seconds, 
+    // then call the getCPUTurn function
     function CPUPlay() {
         if (winner) return;
         sleep(1000);
@@ -37,6 +45,8 @@ export default function TicTacToe() {
         setIsCPUNext(false);
     }
 
+    // This function will loop through the board array and find all the empty cells, 
+    // then, it will randomly select one of the empty cells.
     function getCPUTurn() {
         const emptyIndexes = [];
         board.forEach((row, arrayIndex) => {

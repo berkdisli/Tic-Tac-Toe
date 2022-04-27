@@ -25,6 +25,32 @@ export default function TicTacToe() {
         }
     }, [isCPUNext]);
 
+    function CPUPlay() {
+        if (winner) return;
+        sleep(1000);
+
+        const CPUMove = getCPUTurn();
+        board[CPUMove.arrayIndex][CPUMove.index] = players?.CPU?.SYM;
+
+        setBoard((board) => [...board]);
+        checkWinner();
+        setIsCPUNext(false);
+    }
+
+    function getCPUTurn() {
+        const emptyIndexes = [];
+        board.forEach((row, arrayIndex) => {
+            row.forEach((cell, index) => {
+                if (cell === "") {
+                    emptyIndexes.push({ arrayIndex, index });
+                }
+            });
+        });
+        const randomIndex = Math.floor(Math.random() * emptyIndexes.length);
+        return emptyIndexes[randomIndex];
+    }
+
+
     return (
         <div>
             <div>{!winner && displayTurn()}</div>

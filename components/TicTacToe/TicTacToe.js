@@ -127,6 +127,10 @@ export default function TicTacToe() {
         }
     }
 
+    // Function will check if the CPU is next. 
+    // If it is, it will return CPU's turn. 
+    // If it is not, it will return Your turn.
+
     function displayTurn() {
         if (isCPUNext) {
             return "CPU's turn";
@@ -135,6 +139,17 @@ export default function TicTacToe() {
         }
     }
 
+    // This function will set the board state to the initial board state and set the winner state to null. 
+    // Then, it will set the isCPUNext state to false.
+    function playAgainFn() {
+        setBoard([
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""],
+        ]);
+        setWinner(null);
+        setIsCPUNext(false);
+    }
 
     return (
         <div>

@@ -127,6 +127,15 @@ export default function TicTacToe() {
         }
     }
 
+    function displayTurn() {
+        if (isCPUNext) {
+            return "CPU's turn";
+        } else {
+            return "Your turn";
+        }
+    }
+
+
     return (
         <div>
             <div>{!winner && displayTurn()}</div>

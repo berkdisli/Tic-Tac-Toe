@@ -116,6 +116,17 @@ export default function TicTacToe() {
             return;
         }
     }
+
+    // If the winner state is draw, it will return It's a draw!. 
+    // If the winner state is not draw, it will return ${winner} won!
+    function displayWinner() {
+        if (winner === "draw") {
+            return "It's a draw!";
+        } else if (winner) {
+            return '${winner} won!';
+        }
+    }
+
     return (
         <div>
             <div>{!winner && displayTurn()}</div>

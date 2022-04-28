@@ -60,7 +60,62 @@ export default function TicTacToe() {
         return emptyIndexes[randomIndex];
     }
 
+    // checkWinner function, which will check if the game is over. 
+    // If it is, it will return. If it is not, 
+    // it will check if the player or the CPU has won
+    function checkWinner() {
+        //check same row
+        for (let index = 0; index < board.length; index++) {
+            const row = board[index];
+            if (row.every((cell) === players?.CPU?.SYM)) {
+                setWinner(players?.CPU?.NAME);
+                return;
+            } else if (row.every((cell) => cell === players?.HUMAN?.SYM)) {
+                setWinner(players?.HUMAN?.NAME);
+                return;
+            }
+        }
 
+        //check same column
+        for (let i = 0; i < 3; i++) {
+            const column = board.map((row) => row[i]);
+            if (column.every((cell) => cell === players?.CPU?.SYM)) {
+                setWinner(players?.CPU?.NAME);
+                return;
+            } else if (column.every((cell) => cell === players?.HUMAN.SYM)) {
+                setWinner(players?.HUMAN?.NAME);
+                return;
+            }
+        }
+
+        // It loops through the board array and checks if the same row, column, or diagonal has the same symbol. 
+        // If it does, it will set the winner state to the player’s name. 
+        // The game is a draw if all the boards are filled with no matching symbols found. 
+        // It will then set the winner state to draw.
+
+        //check same diagonal
+        const diagonal1 = [board[0][0], board[1][1], board[2][2]];
+        const diagonal2 = [board[0][2], board[1][1], board[2][0]];
+        if (diagonal1.every((cell) => cell === players?.CPU?.SYM)) {
+            setWinner(players?.CPU?.NAME);
+            return;
+        } else if (diagonal1.every((cell) => cell === players?.HUMAN?.SYM)) {
+            setWinner(players?.HUMAN?.NAME);
+            return;
+        } else if (diagonal2.every((cell) => cell === players?.CPU?.SYM)) {
+            setWinner(players?.CPU?.NAME);
+            return;
+        } else if (diagonal2.every((cell) => cell === players?.HUMAN?.SYM)) {
+            setWinner(players?.HUMAN?.NAME);
+            return;
+        } else if (board.flat().every((cell) => cell !== "")) {
+            setWinner("draw");
+            return;
+        } else {
+            setWinner(null);
+            return;
+        }
+    }
     return (
         <div>
             <div>{!winner && displayTurn()}</div>
@@ -108,4 +163,4 @@ export default function TicTacToe() {
             )}
         </div>
     )
-}
+} 
